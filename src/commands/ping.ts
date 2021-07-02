@@ -1,6 +1,7 @@
 import { MessageEmbed } from "discord.js";
-import { Command } from "../structures/classes/command";
-import { Scope } from "../structures/enums/scopes";
+
+import { Command } from "../models/entities/command";
+import { Scope } from "../models/enums/scopes";
 
 export default new Command({
     name: "ping",

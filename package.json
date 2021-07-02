@@ -1,8 +1,14 @@
 {
-    "name": "brackeys-bot-v4",
+    "name": "bot-v4",
     "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
+    "main": "build/index.js",
+    "scripts": {
+        "start": "node ./build/index.js",
+        "build": "tsc --build",
+        "dev": "nodemon",
+        "format": "prettier --write .",
+        "lint": "eslint src --ext .js,.ts"
+    },
     "dependencies": {
         "discord.js": "^12.5.1",
         "mysql": "^2.18.1",
@@ -10,25 +16,28 @@
         "typeorm": "0.2.31"
     },
     "devDependencies": {
+        "@trivago/prettier-plugin-sort-imports": "^2.0.2",
         "@types/node": "^14.14.31",
         "@types/ws": "^7.4.0",
-        "ts-node": "3.3.0",
-        "typescript": "3.3.3333"
-    },
-    "scripts": {
-        "build": "tsc --build tsconfig.json",
-        "dev": "tsc --build --watch tsconfig.json",
-        "start": "node ./build/index.js"
+        "@typescript-eslint/eslint-plugin": "^4.28.1",
+        "@typescript-eslint/parser": "^4.28.1",
+        "eslint": "^7.29.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-prettier": "^3.4.0",
+        "nodemon": "^2.0.9",
+        "prettier": "^2.3.2",
+        "ts-node": "^10.0.0",
+        "typescript": "^3.7.3"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/YilianSource/brackeys-bot-v4.git"
+        "url": "git+https://github.com/yiliansource/brackeys-bot-v4.git"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/YilianSource/brackeys-bot-v4/issues"
+        "url": "https://github.com/yiliansource/brackeys-bot-v4/issues"
     },
-    "homepage": "https://github.com/YilianSource/brackeys-bot-v4#readme"
+    "homepage": "https://github.com/yiliansource/brackeys-bot-v4#readme"
 }

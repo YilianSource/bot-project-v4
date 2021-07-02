@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 import {
     Column,
     Entity,
@@ -5,11 +6,12 @@ import {
     OneToMany,
     PrimaryGeneratedColumn,
 } from "typeorm";
-import { Scope } from "../../structures/enums/scopes";
-import { GuildState } from "./GuildState";
-import { Infraction } from "./Infraction";
 
-@Entity({ name: "memberStates" })
+import { Scope } from "../../models/enums/scopes";
+import { GuildState } from "./guildState";
+import { Infraction } from "./infraction";
+
+@Entity({ name: "memberstates" })
 export class MemberState {
     @PrimaryGeneratedColumn()
     _id: string;
@@ -17,14 +19,14 @@ export class MemberState {
     @Column()
     memberId: string;
 
-    @Column()
-    _scopes: string = "";
-
-    @ManyToOne((type) => GuildState, (guildState) => guildState.memberStates)
+    @ManyToOne(() => GuildState, (guildState) => guildState.memberStates)
     guildState: Promise<GuildState>;
 
-    @OneToMany((type) => Infraction, (infraction) => infraction.memberState)
+    @OneToMany(() => Infraction, (infraction) => infraction.memberState)
     infractions: Promise<Infraction[]>;
+
+    @Column()
+    private _scopes: string = "";
 
     scopes(): Scope[] {
         return (
@@ -32,6 +34,7 @@ export class MemberState {
                 .split("-")
                 /* Filters away empty strings when there are no scopes granted at first */
                 .filter(Boolean)
+                // fixme
                 .map((str) => (Scope as any)[str])
         );
     }

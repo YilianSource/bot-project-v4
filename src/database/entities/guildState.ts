@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
-import { Scope } from "../../structures/enums/scopes";
-import { Infraction } from "./Infraction";
-import { MemberState } from "./MemberState";
 
-@Entity({ name: "guildStates" })
+import { Scope } from "../../models/enums/scopes";
+import { Infraction } from "./infraction";
+import { MemberState } from "./memberState";
+
+@Entity({ name: "guildstates" })
 export class GuildState {
     @PrimaryGeneratedColumn()
     _id: number;
@@ -17,10 +19,10 @@ export class GuildState {
     @Column()
     prefix: string = "!";
 
-    @OneToMany((type) => MemberState, (member) => member.guildState)
+    @OneToMany(() => MemberState, (member) => member.guildState)
     memberStates: Promise<MemberState[]> = Promise.resolve([]);
 
-    @OneToMany((type) => Infraction, (infraction) => infraction.guildState)
+    @OneToMany(() => Infraction, (infraction) => infraction.guildState)
     infractions: Promise<Infraction[]> = Promise.resolve([]);
 
     @Column()
@@ -30,19 +32,20 @@ export class GuildState {
     @Column()
     private _rolesScopes: string = "";
 
-    rolesScopes(): RoleScopes[] {
+    getRoleScopes(): RoleScopes[] {
         return this._rolesScopes.split("/").map((roleScopesStr) => {
             return {
                 roleId: roleScopesStr.split("-")[0],
                 scopes: roleScopesStr
                     .split("-")[1]
                     .split(",")
+                    // fixme
                     .map((scopesStr) => (Scope as any)[scopesStr]),
             };
         });
     }
 
-    setRolesScopes(rolesScopes: RoleScopes[]): void {
+    setRoleScopes(rolesScopes: RoleScopes[]): void {
         this._rolesScopes = rolesScopes
             .map(
                 (roleScopes) =>

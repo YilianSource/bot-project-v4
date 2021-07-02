@@ -1,7 +1,6 @@
-import { MessageEmbed } from "discord.js";
-import { Command } from "../structures/classes/command";
-import { ArgumentType } from "../structures/enums/argument-type";
-import { Scope } from "../structures/enums/scopes";
+import { Command } from "../models/entities/command";
+import { ArgumentType } from "../models/enums/argumentType";
+import { Scope } from "../models/enums/scopes";
 
 export default new Command({
     name: "prefix",

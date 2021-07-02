@@ -1,9 +1,10 @@
 import { Client, Message, MessageEmbed } from "discord.js";
 import { Repository } from "typeorm";
-import { GuildState } from "../../database/entity/GuildState";
-import { MemberState } from "../../database/entity/MemberState";
-import { ArgumentType } from "../enums/argument-type";
-import { CommandType } from "../enums/command-type";
+
+import { GuildState } from "../../database/entities/guildState";
+import { MemberState } from "../../database/entities/memberState";
+import { ArgumentType } from "../enums/argumentType";
+import { CommandType } from "../enums/commandType";
 import { Scope } from "../enums/scopes";
 
 export class Command {
@@ -16,6 +17,7 @@ export class Command {
     cd?: number = 0;
     aliases?: Array<string> = [];
     args?: Array<ArgumentType | Array<ArgumentType>> = [];
+
     execute: (
         info: {
             bot: Client;
@@ -27,8 +29,10 @@ export class Command {
         msg: Message,
         args: Array<string>,
         help: MessageEmbed,
+        // fixme
         cdReset: () => any
-    ) => any;
+    ) => Promise<void | unknown>;
+
     constructor(opt: Command) {
         Object.assign(this, opt);
     }
