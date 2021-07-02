@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
-import { GuildState } from "./GuildState";
-import { MemberState } from "./MemberState";
+
+import { GuildState } from "./guildState";
+import { MemberState } from "./memberState";
 
 @Entity({ name: "infractions" })
 export class Infraction {
@@ -16,9 +17,9 @@ export class Infraction {
     @Column()
     createdAt: Date;
 
-    @ManyToOne((type) => MemberState, (member) => member.infractions)
+    @ManyToOne(() => MemberState, (member) => member.infractions)
     memberState: MemberState;
 
-    @ManyToOne((type) => GuildState, (guild) => guild.infractions)
+    @ManyToOne(() => GuildState, (guild) => guild.infractions)
     guildState: GuildState;
 }

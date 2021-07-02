@@ -1,0 +1,6 @@
+# ignore configs
+.eslintrc.js
+
+# ignore built directories
+build
+node_modules
